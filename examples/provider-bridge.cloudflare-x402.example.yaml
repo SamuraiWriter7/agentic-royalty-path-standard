@@ -1,0 +1,77 @@
+provider_bridge:
+  schema_version: "0.4.0-candidate"
+  bridge_id: pb_20260703_001
+  created_at: "2026-07-03T19:45:00Z"
+
+  provider:
+    provider_id: provider_cloudflare_monetization_gateway
+    provider_name: "Cloudflare Monetization Gateway"
+    provider_type: edge_monetization_gateway
+    provider_ref: "external:cloudflare:monetization-gateway"
+    provider_version: "early-access"
+
+  capabilities:
+    supports_paid_access: true
+    supports_usage_billing: true
+    supports_payment_receipts: true
+    supports_agent_identity: true
+    supports_replay_protection: true
+    supports_settlement_reference: true
+    supported_resource_types:
+      - web_page
+      - dataset
+      - api
+      - mcp_tool
+
+  protocol_bindings:
+    - protocol: x402
+      binding_type: http_status_flow
+      event_types:
+        - paid_resource_access
+        - api_usage_billing
+        - mcp_tool_payment
+        - settlement_confirmation
+      notes: "Maps HTTP 402-style payment flows into monetization and payment receipt records."
+
+  event_mapping:
+    external_event_ref: "external:x402:paid-access-event"
+    maps_to:
+      - monetization_event
+      - payment_receipt
+      - audit_record
+    required_fields:
+      - provider
+      - protocol
+      - resource_ref
+      - pricing
+      - payment_status
+      - settlement_ref
+      - receipt_hash
+    optional_fields:
+      - path_ref
+      - action_receipt_ref
+      - wayfinder_step_ref
+      - agent_identity_ref
+      - session_ref
+    field_mapping_notes: "External x402-style payment events can be linked to Agentic Royalty Path records through monetization_event.request_context."
+
+  data_policy:
+    stores_raw_payload: false
+    stores_personal_data: false
+    minimization_required: true
+    redaction_required: true
+    retention_policy_ref: null
+
+  trust_boundary:
+    external_provider_trusted: false
+    signature_required: true
+    provider_verification_required: true
+    human_review_required: true
+    trust_notes: "External provider events are treated as audit evidence, not as final royalty decisions."
+
+  audit:
+    bridge_status: candidate
+    legal_claim_created: false
+    requires_human_review: true
+    review_status: not_reviewed
+    notes: "Provider Bridge records define interoperability mappings only. They do not create enforceable royalty claims."
