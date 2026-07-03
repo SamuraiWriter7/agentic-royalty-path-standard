@@ -1,5 +1,49 @@
 # Changelog
 
+## v0.5.0-candidate — Agent Commerce Audit Bridge
+
+Fifth candidate release.
+
+### Added
+
+- `agent-commerce-audit-bridge.schema.json`
+- `agent-commerce-audit-bridge.example.yaml`
+- Validation support for agent commerce audit bridge examples
+- Audit bridge structure for AI agent commerce actions
+- Authorization boundary records for commerce-related agent actions
+- Transaction context records for payment and settlement references
+- Risk control records for commerce audit review
+
+### New concepts
+
+- `agent_commerce_audit_bridge`
+- `commerce_action`
+- `agent_context`
+- `authorization_boundary`
+- `transaction_context`
+- `provider_refs`
+- `path_refs`
+- `risk_controls`
+- `commerce_action_confirmed`
+
+### Purpose
+
+v0.5 introduces an audit bridge for AI agent commerce actions.
+
+v0.1 recorded AI agent value-generation paths.  
+v0.2 connected those paths to monetization events.  
+v0.3 introduced candidate royalty weighting.  
+v0.4 mapped external providers into the standard.  
+v0.5 records commerce actions performed or initiated by AI agents and connects them to authorization, provider, transaction, path, and audit records.
+
+### Important note
+
+Agent Commerce Audit Bridge records are audit records.
+
+They do not execute transactions, create legal royalty claims, approve payouts, or determine final settlement rights by themselves.
+
+Any commerce action, payment record, or royalty candidate should be treated as provisional until reviewed by a human, marketplace rule, legal framework, or external royalty engine.
+
 ## v0.4.0-candidate — Provider Bridge Layer
 
 Fourth candidate release.
