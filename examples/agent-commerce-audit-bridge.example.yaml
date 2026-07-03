@@ -1,0 +1,75 @@
+agent_commerce_audit_bridge:
+  schema_version: "0.5.0-candidate"
+  commerce_audit_id: acab_20260703_001
+  created_at: "2026-07-03T20:00:00Z"
+
+  commerce_action:
+    action_type: paid_resource_access
+    intent: "Access a monetized technical resource through an AI agent workflow."
+    merchant_ref: "merchant:premium-resource-provider-001"
+    resource_ref: "origin:premium-resource-v1"
+    commerce_status: executed
+
+  agent_context:
+    agent_id: "agent:vscode-copilot-session-001"
+    agent_type: browser_agent
+    operator_ref: "operator:human-001"
+    session_ref: "vscode_agent_session_001"
+    autonomy_level: human_approved
+
+  authorization_boundary:
+    authorization_required: true
+    authorization_status: approved
+    spending_limit_enforced: true
+    spending_limit:
+      amount: "1.00"
+      currency: "USD"
+      period: per_session
+    policy_ref: "policy:agent-commerce-spending-v1"
+    human_approval_required: true
+    approval_ref: "approval:human-approval-001"
+
+  transaction_context:
+    payment_required: true
+    payment_status: verified
+    amount: "0.005"
+    currency: "USD-stablecoin"
+    settlement_ref: "external:x402:settlement-001"
+    invoice_ref: null
+    receipt_hash: "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+
+  provider_refs:
+    provider_bridge_ref: "pb_20260703_001"
+    monetization_event_ref: "me_20260703_001"
+    payment_provider_ref: "external:x402"
+    identity_provider_ref: null
+
+  path_refs:
+    agentic_royalty_path_ref: "arp_20260703_001"
+    action_receipt_refs:
+      - "bar_001"
+      - "bar_002"
+      - "bar_003"
+    wayfinder_step_refs:
+      - "s1"
+      - "s2"
+      - "s5"
+    weighting_ref: "prw_20260703_001"
+
+  risk_controls:
+    risk_level: low
+    allowed_by_policy: true
+    requires_review: true
+    fraud_check_status: not_applicable
+    data_minimization_required: true
+    redaction_required: true
+    notes: "The commerce action was human-approved and remained within the configured spending limit."
+
+  audit:
+    audit_status: pending_review
+    commerce_action_confirmed: true
+    legal_claim_created: false
+    payout_decision_created: false
+    requires_human_review: true
+    review_status: not_reviewed
+    notes: "This bridge records an agent commerce action for audit purposes only. It does not create a legal royalty claim or final payout decision."
