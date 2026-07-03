@@ -90,3 +90,40 @@ v0.2 — Monetization Event Extension
 v0.3 — Path Royalty Weighting
 v0.4 — Provider Bridge Layer
 v0.5 — Agent Commerce Audit Bridge
+
+## v0.2 — Monetization Event Extension
+
+v0.2 introduces the Monetization Event Extension.
+
+This extension allows an Agentic Royalty Path to reference external monetization, payment, billing, or paid-access events.
+
+Examples include:
+
+- paid resource access
+- API usage billing
+- MCP tool payment
+- agent commerce transactions
+- subscription-based access
+- logged free access events
+
+The extension does not define a legal royalty claim by itself.
+
+Instead, it records audit-ready evidence that a value-bearing access or payment event occurred during an AI agent path.
+
+```text
+Agentic Path
+  ↓
+Action Receipt
+  ↓
+Monetization Event
+  ↓
+Payment Receipt
+  ↓
+Audit
+  ↓
+Royalty Candidate
+Added in v0.2
+monetization-event.schema.json
+monetization-event.cloudflare-x402.example.yaml
+agentic-royalty-path.monetized.example.yaml
+validation coverage for monetized path examples
