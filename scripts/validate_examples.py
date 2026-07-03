@@ -12,7 +12,17 @@ VALIDATION_TARGETS = [
         "name": "Agentic Royalty Path",
         "schema": ROOT / "schemas" / "agentic-royalty-path.schema.json",
         "example": ROOT / "examples" / "agentic-royalty-path.example.yaml",
-    }
+    },
+    {
+        "name": "Agentic Royalty Path Monetized Example",
+        "schema": ROOT / "schemas" / "agentic-royalty-path.schema.json",
+        "example": ROOT / "examples" / "agentic-royalty-path.monetized.example.yaml",
+    },
+    {
+        "name": "Monetization Event",
+        "schema": ROOT / "schemas" / "monetization-event.schema.json",
+        "example": ROOT / "examples" / "monetization-event.cloudflare-x402.example.yaml",
+    },
 ]
 
 
