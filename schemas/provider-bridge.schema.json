@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/provider-bridge.schema.json",
+  "title": "Provider Bridge",
+  "description": "A bridge record for mapping external provider events, protocols, payment signals, API usage records, or agent commerce events into Agentic Royalty Path records.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["provider_bridge"],
+  "properties": {
+    "provider_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "bridge_id",
+        "provider",
+        "capabilities",
+        "protocol_bindings",
+        "event_mapping",
+        "trust_boundary",
+        "audit"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "bridge_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "provider": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider_id",
+            "provider_name",
+            "provider_type",
+            "provider_ref"
+          ],
+          "properties": {
+            "provider_id": {
+              "type": "string"
+            },
+            "provider_name": {
+              "type": "string"
+            },
+            "provider_type": {
+              "type": "string",
+              "enum": [
+                "edge_monetization_gateway",
+                "payment_network",
+                "api_billing_platform",
+                "mcp_tool_gateway",
+                "agent_commerce_platform",
+                "marketplace",
+                "identity_provider",
+                "other"
+              ]
+            },
+            "provider_ref": {
+              "type": "string"
+            },
+            "provider_version": {
+              "type": "string"
+            }
+          }
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supports_paid_access",
+            "supports_usage_billing",
+            "supports_payment_receipts",
+            "supports_agent_identity",
+            "supports_replay_protection",
+            "supports_settlement_reference"
+          ],
+          "properties": {
+            "supports_paid_access": {
+              "type": "boolean"
+            },
+            "supports_usage_billing": {
+              "type": "boolean"
+            },
+            "supports_payment_receipts": {
+              "type": "boolean"
+            },
+            "supports_agent_identity": {
+              "type": "boolean"
+            },
+            "supports_replay_protection": {
+              "type": "boolean"
+            },
+            "supports_settlement_reference": {
+              "type": "boolean"
+            },
+            "supported_resource_types": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "web_page",
+                  "dataset",
+                  "api",
+                  "mcp_tool",
+                  "file",
+                  "model_endpoint",
+                  "app_environment",
+                  "commerce_item",
+                  "other"
+                ]
+              }
+            }
+          }
+        },
+        "protocol_bindings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "protocol",
+              "binding_type",
+              "event_types"
+            ],
+            "properties": {
+              "protocol": {
+                "type": "string"
+              },
+              "binding_type": {
+                "type": "string",
+                "enum": [
+                  "http_status_flow",
+                  "webhook",
+                  "api_polling",
+                  "signed_receipt",
+                  "settlement_record",
+                  "event_stream",
+                  "manual_import",
+                  "other"
+                ]
+              },
+              "event_types": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "paid_resource_access",
+                    "api_usage_billing",
+                    "mcp_tool_payment",
+                    "agent_commerce_transaction",
+                    "subscription_access",
+                    "free_access_logged",
+                    "identity_verification",
+                    "settlement_confirmation",
+                    "other"
+                  ]
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "event_mapping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "external_event_ref",
+            "maps_to",
+            "required_fields",
+            "optional_fields"
+          ],
+          "properties": {
+            "external_event_ref": {
+              "type": "string"
+            },
+            "maps_to": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "agentic_royalty_path",
+                  "monetization_event",
+                  "payment_receipt",
+                  "path_royalty_weighting",
+                  "audit_record",
+                  "other"
+                ]
+              }
+            },
+            "required_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "optional_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "field_mapping_notes": {
+              "type": "string"
+            }
+          }
+        },
+        "data_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "stores_raw_payload",
+            "stores_personal_data",
+            "minimization_required",
+            "redaction_required"
+          ],
+          "properties": {
+            "stores_raw_payload": {
+              "type": "boolean"
+            },
+            "stores_personal_data": {
+              "type": "boolean"
+            },
+            "minimization_required": {
+              "type": "boolean"
+            },
+            "redaction_required": {
+              "type": "boolean"
+            },
+            "retention_policy_ref": {
+              "type": ["string", "null"]
+            }
+          }
+        },
+        "trust_boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "external_provider_trusted",
+            "signature_required",
+            "provider_verification_required",
+            "human_review_required"
+          ],
+          "properties": {
+            "external_provider_trusted": {
+              "type": "boolean"
+            },
+            "signature_required": {
+              "type": "boolean"
+            },
+            "provider_verification_required": {
+              "type": "boolean"
+            },
+            "human_review_required": {
+              "type": "boolean"
+            },
+            "trust_notes": {
+              "type": "string"
+            }
+          }
+        },
+        "audit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "bridge_status",
+            "legal_claim_created",
+            "requires_human_review",
+            "review_status"
+          ],
+          "properties": {
+            "bridge_status": {
+              "type": "string",
+              "enum": [
+                "candidate",
+                "active",
+                "deprecated",
+                "rejected",
+                "needs_more_evidence"
+              ]
+            },
+            "legal_claim_created": {
+              "type": "boolean"
+            },
+            "requires_human_review": {
+              "type": "boolean"
+            },
+            "review_status": {
+              "type": "string",
+              "enum": [
+                "not_reviewed",
+                "under_review",
+                "reviewed",
+                "disputed"
+              ]
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
