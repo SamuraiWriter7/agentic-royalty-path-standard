@@ -246,3 +246,38 @@ Provider Bridge records are interoperability records.
 They do not create legal royalty claims.
 
 External provider events should be treated as audit evidence until reviewed by a human, marketplace rule, legal framework, or external royalty engine.
+
+## v0.5 — Agent Commerce Audit Bridge
+
+v0.5 introduces the Agent Commerce Audit Bridge.
+
+This layer records AI agent commerce actions as audit-ready records.
+
+Examples include:
+
+- purchases
+- subscriptions
+- paid resource access
+- API calls
+- MCP tool usage
+- quote requests
+- contract acceptance
+- refund requests
+- disputes
+
+The Agent Commerce Audit Bridge connects commerce actions to authorization boundaries, provider events, payment records, path references, risk controls, and royalty candidate mappings.
+
+```text
+Agent Commerce Action
+  ↓
+Authorization Boundary
+  ↓
+Provider Bridge
+  ↓
+Payment / Usage Event
+  ↓
+Agentic Royalty Path
+  ↓
+Audit
+  ↓
+Royalty Candidate
