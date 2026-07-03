@@ -23,6 +23,11 @@ VALIDATION_TARGETS = [
         "schema": ROOT / "schemas" / "monetization-event.schema.json",
         "example": ROOT / "examples" / "monetization-event.cloudflare-x402.example.yaml",
     },
+    {
+        "name": "Path Royalty Weighting",
+        "schema": ROOT / "schemas" / "path-royalty-weighting.schema.json",
+        "example": ROOT / "examples" / "path-royalty-weighting.example.yaml",
+    },
 ]
 
 
