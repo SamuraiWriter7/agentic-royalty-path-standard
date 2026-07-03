@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/monetization-event.schema.json",
+  "title": "Monetization Event",
+  "description": "An extension record for linking external monetization, payment, billing, or paid-access events to an Agentic Royalty Path.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["monetization_event"],
+  "properties": {
+    "monetization_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "event_id",
+        "event_type",
+        "provider",
+        "protocol",
+        "resource",
+        "pricing",
+        "request_context",
+        "payment_receipt",
+        "audit"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "event_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event_type": {
+          "type": "string",
+          "enum": [
+            "paid_resource_access",
+            "api_usage_billing",
+            "mcp_tool_payment",
+            "agent_commerce_transaction",
+            "subscription_access",
+            "free_access_logged",
+            "other"
+          ]
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resource": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "resource_type",
+            "resource_ref",
+            "resource_owner_ref"
+          ],
+          "properties": {
+            "resource_type": {
+              "type": "string",
+              "enum": [
+                "web_page",
+                "dataset",
+                "api",
+                "mcp_tool",
+                "file",
+                "model_endpoint",
+                "app_environment",
+                "other"
+              ]
+            },
+            "resource_ref": {
+              "type": "string"
+            },
+            "resource_owner_ref": {
+              "type": "string"
+            },
+            "origin_ref": {
+              "type": "string"
+            }
+          }
+        },
+        "pricing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "currency",
+            "unit"
+          ],
+          "properties": {
+            "pricing_policy_ref": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string",
+              "enum": [
+                "per_request",
+                "per_call",
+                "per_token",
+                "per_second",
+                "per_result",
+                "per_session",
+                "subscription",
+                "other"
+              ]
+            }
+          }
+        },
+        "request_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path_ref",
+            "action_receipt_ref",
+            "wayfinder_step_ref",
+            "agent_identity_ref"
+          ],
+          "properties": {
+            "path_ref": {
+              "type": "string"
+            },
+            "action_receipt_ref": {
+              "type": "string"
+            },
+            "wayfinder_step_ref": {
+              "type": "string"
+            },
+            "agent_identity_ref": {
+              "type": "string"
+            },
+            "session_ref": {
+              "type": "string"
+            }
+          }
+        },
+        "payment_receipt": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "payment_required",
+            "payment_status",
+            "settlement_ref",
+            "receipt_hash"
+          ],
+          "properties": {
+            "payment_required": {
+              "type": "boolean"
+            },
+            "payment_status": {
+              "type": "string",
+              "enum": [
+                "not_required",
+                "pending",
+                "verified",
+                "failed",
+                "refunded",
+                "disputed"
+              ]
+            },
+            "settlement_ref": {
+              "type": ["string", "null"]
+            },
+            "receipt_hash": {
+              "type": ["string", "null"]
+            },
+            "amount_paid": {
+              "type": ["object", "null"],
+              "additionalProperties": false,
+              "required": [
+                "amount",
+                "currency"
+              ],
+              "properties": {
+                "amount": {
+                  "type": "string"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "audit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "external_provider_verified",
+            "replay_protection",
+            "audit_status",
+            "legal_claim_created"
+          ],
+          "properties": {
+            "external_provider_verified": {
+              "type": "boolean"
+            },
+            "replay_protection": {
+              "type": "boolean"
+            },
+            "audit_status": {
+              "type": "string",
+              "enum": [
+                "pending_review",
+                "confirmed",
+                "rejected",
+                "needs_more_evidence"
+              ]
+            },
+            "legal_claim_created": {
+              "type": "boolean"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
