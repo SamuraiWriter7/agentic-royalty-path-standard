@@ -1,0 +1,85 @@
+path_royalty_weighting:
+  schema_version: "0.3.0-candidate"
+  weighting_id: prw_20260703_001
+  created_at: "2026-07-03T19:30:00Z"
+
+  path_ref: "arp_20260703_001"
+  monetization_event_ref: "me_20260703_001"
+
+  scoring_model:
+    model_type: payment_aware_candidate
+    normalization: sum_to_one
+    total_weight: 1.0
+    notes: "Candidate weighting based on path contribution, origin dependency, action evidence, and monetization signal."
+
+  scoring_factors:
+    path_complexity: 0.22
+    origin_dependency: 0.31
+    action_receipt_confidence: 0.18
+    monetization_signal: 0.14
+    agent_decision_depth: 0.07
+    human_review_depth: 0.04
+    reproducibility_score: 0.04
+
+  royalty_candidates:
+    - candidate_id: rc_001
+      role: test_flow_author
+      beneficiary_ref: "origin:test-flow-login-v1"
+      contribution_basis: "Defined the original verification flow used by the agentic path."
+      suggested_share: 0.30
+      evidence_refs:
+        - "arp_20260703_001"
+        - "bar_001"
+        - "bar_003"
+      notes: "Candidate share only; requires review before any payout decision."
+
+    - candidate_id: rc_002
+      role: ui_component_author
+      beneficiary_ref: "origin:login-ui-component-v2"
+      contribution_basis: "Provided the UI component structure interacted with during the agent path."
+      suggested_share: 0.20
+      evidence_refs:
+        - "arp_20260703_001"
+        - "bar_002"
+      notes: "Contribution is inferred from component interaction evidence."
+
+    - candidate_id: rc_003
+      role: path_designer
+      beneficiary_ref: "origin:wayfinder-login-route-v1"
+      contribution_basis: "Designed the Wayfinder route followed by the AI agent."
+      suggested_share: 0.25
+      evidence_refs:
+        - "arp_20260703_001"
+      notes: "Path design contributed to repeatable agent execution."
+
+    - candidate_id: rc_004
+      role: resource_owner
+      beneficiary_ref: "origin:premium-resource-v1"
+      contribution_basis: "Owned the monetized resource accessed during the agentic path."
+      suggested_share: 0.15
+      evidence_refs:
+        - "me_20260703_001"
+      notes: "Payment event is treated as audit evidence, not as legal royalty creation."
+
+    - candidate_id: rc_005
+      role: human_reviewer
+      beneficiary_ref: "reviewer:human-001"
+      contribution_basis: "Reviewed the path and confirmed audit-readiness."
+      suggested_share: 0.10
+      evidence_refs:
+        - "audit:arp_20260703_001"
+      notes: "Review contribution is included as a candidate share."
+
+  payment_context:
+    payment_aware: true
+    payment_event_refs:
+      - "me_20260703_001"
+    gross_amount_ref: "payment_receipt.amount_paid.amount"
+    currency_ref: "payment_receipt.amount_paid.currency"
+
+  audit:
+    weighting_status: candidate
+    legal_claim_created: false
+    requires_human_review: true
+    review_status: not_reviewed
+    notes: "This record provides suggested weighting only. It does not create enforceable royalty claims."
