@@ -1,5 +1,44 @@
 # Changelog
 
+## v0.4.0-candidate — Provider Bridge Layer
+
+Fourth candidate release.
+
+### Added
+
+- `provider-bridge.schema.json`
+- `provider-bridge.cloudflare-x402.example.yaml`
+- Validation support for provider bridge examples
+- Provider-neutral bridge structure for external monetization and payment infrastructure
+
+### New concepts
+
+- `provider_bridge`
+- `provider`
+- `capabilities`
+- `protocol_bindings`
+- `event_mapping`
+- `data_policy`
+- `trust_boundary`
+- `bridge_status`
+
+### Purpose
+
+v0.4 introduces a bridge layer for mapping external provider events into Agentic Royalty Path records.
+
+v0.1 recorded AI agent value-generation paths.  
+v0.2 connected those paths to monetization events.  
+v0.3 introduced candidate royalty weighting.  
+v0.4 defines how external infrastructure providers can be connected in a provider-neutral way.
+
+### Important note
+
+Provider Bridge records are interoperability records.
+
+They do not execute payments, create legal royalty claims, or determine final payout rights by themselves.
+
+Any external provider event should be treated as audit evidence until reviewed by a human, marketplace rule, legal framework, or external royalty engine.
+
 ## v0.3.0-candidate — Path Royalty Weighting
 
 Third candidate release.
