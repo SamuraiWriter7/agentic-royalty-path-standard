@@ -1,0 +1,96 @@
+agentic_royalty_path:
+  schema_version: "0.2.0-candidate"
+  path_id: arp_20260703_001
+  created_at: "2026-07-03T18:50:00Z"
+
+  goal:
+    intent: "access and verify a paid resource through an AI agent path"
+    origin_ref: "premium-resource-access-flow-v1"
+    expected_outcome: "paid resource is accessed after payment verification"
+
+  path_layer:
+    route_type: paid_resource_access_path
+    wayfinder_ref: "wayfinder-paid-resource-route-v1"
+    steps:
+      - step_id: s1
+        action_type: open_page
+        target: "https://example.com/premium-resource"
+        purpose: "request access to a monetized resource"
+      - step_id: s2
+        action_type: observe
+        target: "payment_required_response"
+        purpose: "detect that payment is required"
+      - step_id: s3
+        action_type: other
+        target: "payment_authorization"
+        purpose: "submit payment authorization through an external protocol"
+      - step_id: s4
+        action_type: observe
+        target: "payment_verified_response"
+        purpose: "confirm that paid access was granted"
+      - step_id: s5
+        action_type: read_page
+        target: "premium_resource_content"
+        purpose: "read the monetized resource after verified access"
+
+  action_receipts:
+    - receipt_id: bar_001
+      step_ref: s1
+      action_type: open_page
+      evidence_hash: "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    - receipt_id: bar_002
+      step_ref: s2
+      action_type: observe
+      evidence_hash: "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    - receipt_id: bar_003
+      step_ref: s5
+      action_type: read_page
+      evidence_hash: "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+
+  agent_log:
+    session_id: vscode_agent_session_001
+    environment: vscode_copilot_agent
+    tool_calls:
+      - openBrowserPage
+      - readPage
+      - screenshotPage
+    errors: []
+    duration_ms: 22140
+
+  path_hash_chain:
+    step_hashes:
+      - step_id: s1
+        hash: "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      - step_id: s2
+        hash: "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      - step_id: s3
+        hash: "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      - step_id: s4
+        hash: "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      - step_id: s5
+        hash: "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    chain_hash: "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+
+  monetization_event:
+    enabled: true
+    event_ref: "me_20260703_001"
+    provider: cloudflare_monetization_gateway
+    protocol: x402
+
+  audit:
+    permission_boundary: "isolated_agent_browser_session"
+    reproducible: true
+    human_review_required: true
+    audit_status: confirmed
+
+  royalty_mapping:
+    status: candidate
+    origin_events:
+      - "premium_resource_origin"
+      - "paid_access_policy"
+      - "agentic_access_path_design"
+    derivative_events:
+      - "paid_resource_access"
+      - "verified_agentic_consumption"
+      - "monetization_event_trigger"
+    legal_claim_created: false
