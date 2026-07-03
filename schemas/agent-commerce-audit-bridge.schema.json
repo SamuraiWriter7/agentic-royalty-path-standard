@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/agent-commerce-audit-bridge.schema.json",
+  "title": "Agent Commerce Audit Bridge",
+  "description": "An audit bridge record for mapping AI agent commerce actions, authorization boundaries, provider events, payment records, and risk controls into Agentic Royalty Path records.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["agent_commerce_audit_bridge"],
+  "properties": {
+    "agent_commerce_audit_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "commerce_audit_id",
+        "commerce_action",
+        "agent_context",
+        "authorization_boundary",
+        "transaction_context",
+        "provider_refs",
+        "path_refs",
+        "risk_controls",
+        "audit"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "commerce_audit_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "commerce_action": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "action_type",
+            "intent",
+            "merchant_ref",
+            "resource_ref",
+            "commerce_status"
+          ],
+          "properties": {
+            "action_type": {
+              "type": "string",
+              "enum": [
+                "purchase",
+                "subscription",
+                "api_call",
+                "mcp_tool_use",
+                "paid_resource_access",
+                "quote_request",
+                "contract_acceptance",
+                "refund_request",
+                "dispute",
+                "other"
+              ]
+            },
+            "intent": {
+              "type": "string"
+            },
+            "merchant_ref": {
+              "type": "string"
+            },
+            "resource_ref": {
+              "type": "string"
+            },
+            "commerce_status": {
+              "type": "string",
+              "enum": [
+                "proposed",
+                "authorized",
+                "executed",
+                "settled",
+                "failed",
+                "refunded",
+                "disputed",
+                "cancelled"
+              ]
+            }
+          }
+        },
+        "agent_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "agent_id",
+            "agent_type",
+            "operator_ref",
+            "session_ref",
+            "autonomy_level"
+          ],
+          "properties": {
+            "agent_id": {
+              "type": "string"
+            },
+            "agent_type": {
+              "type": "string",
+              "enum": [
+                "browser_agent",
+                "coding_agent",
+                "commerce_agent",
+                "research_agent",
+                "mcp_agent",
+                "multi_agent_system",
+                "other"
+              ]
+            },
+            "operator_ref": {
+              "type": "string"
+            },
+            "session_ref": {
+              "type": "string"
+            },
+            "autonomy_level": {
+              "type": "string",
+              "enum": [
+                "human_initiated",
+                "human_approved",
+                "policy_bounded_autonomous",
+                "fully_autonomous_candidate"
+              ]
+            }
+          }
+        },
+        "authorization_boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "authorization_required",
+            "authorization_status",
+            "spending_limit_enforced",
+            "policy_ref",
+            "human_approval_required"
+          ],
+          "properties": {
+            "authorization_required": {
+              "type": "boolean"
+            },
+            "authorization_status": {
+              "type": "string",
+              "enum": [
+                "not_required",
+                "requested",
+                "approved",
+                "denied",
+                "expired",
+                "unknown"
+              ]
+            },
+            "spending_limit_enforced": {
+              "type": "boolean"
+            },
+            "spending_limit": {
+              "type": ["object", "null"],
+              "additionalProperties": false,
+              "required": [
+                "amount",
+                "currency",
+                "period"
+              ],
+              "properties": {
+                "amount": {
+                  "type": "string"
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "period": {
+                  "type": "string",
+                  "enum": [
+                    "per_request",
+                    "per_session",
+                    "daily",
+                    "monthly",
+                    "other"
+                  ]
+                }
+              }
+            },
+            "policy_ref": {
+              "type": "string"
+            },
+            "human_approval_required": {
+              "type": "boolean"
+            },
+            "approval_ref": {
+              "type": ["string", "null"]
+            }
+          }
+        },
+        "transaction_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "payment_required",
+            "payment_status",
+            "amount",
+            "currency",
+            "settlement_ref"
+          ],
+          "properties": {
+            "payment_required": {
+              "type": "boolean"
+            },
+            "payment_status": {
+              "type": "string",
+              "enum": [
+                "not_required",
+                "pending",
+                "authorized",
+                "verified",
+                "settled",
+                "failed",
+                "refunded",
+                "disputed"
+              ]
+            },
+            "amount": {
+              "type": ["string", "null"]
+            },
+            "currency": {
+              "type": ["string", "null"]
+            },
+            "settlement_ref": {
+              "type": ["string", "null"]
+            },
+            "invoice_ref": {
+              "type": ["string", "null"]
+            },
+            "receipt_hash": {
+              "type": ["string", "null"]
+            }
+          }
+        },
+        "provider_refs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider_bridge_ref",
+            "monetization_event_ref"
+          ],
+          "properties": {
+            "provider_bridge_ref": {
+              "type": ["string", "null"]
+            },
+            "monetization_event_ref": {
+              "type": ["string", "null"]
+            },
+            "payment_provider_ref": {
+              "type": ["string", "null"]
+            },
+            "identity_provider_ref": {
+              "type": ["string", "null"]
+            }
+          }
+        },
+        "path_refs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "agentic_royalty_path_ref",
+            "action_receipt_refs",
+            "wayfinder_step_refs"
+          ],
+          "properties": {
+            "agentic_royalty_path_ref": {
+              "type": "string"
+            },
+            "action_receipt_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "wayfinder_step_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "weighting_ref": {
+              "type": ["string", "null"]
+            }
+          }
+        },
+        "risk_controls": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "risk_level",
+            "allowed_by_policy",
+            "requires_review",
+            "fraud_check_status",
+            "data_minimization_required"
+          ],
+          "properties": {
+            "risk_level": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "critical",
+                "unknown"
+              ]
+            },
+            "allowed_by_policy": {
+              "type": "boolean"
+            },
+            "requires_review": {
+              "type": "boolean"
+            },
+            "fraud_check_status": {
+              "type": "string",
+              "enum": [
+                "not_applicable",
+                "pending",
+                "passed",
+                "failed",
+                "unknown"
+              ]
+            },
+            "data_minimization_required": {
+              "type": "boolean"
+            },
+            "redaction_required": {
+              "type": "boolean"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "audit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "audit_status",
+            "commerce_action_confirmed",
+            "legal_claim_created",
+            "payout_decision_created",
+            "requires_human_review"
+          ],
+          "properties": {
+            "audit_status": {
+              "type": "string",
+              "enum": [
+                "pending_review",
+                "confirmed",
+                "rejected",
+                "needs_more_evidence",
+                "disputed"
+              ]
+            },
+            "commerce_action_confirmed": {
+              "type": "boolean"
+            },
+            "legal_claim_created": {
+              "type": "boolean"
+            },
+            "payout_decision_created": {
+              "type": "boolean"
+            },
+            "requires_human_review": {
+              "type": "boolean"
+            },
+            "review_status": {
+              "type": "string",
+              "enum": [
+                "not_reviewed",
+                "under_review",
+                "reviewed",
+                "disputed"
+              ]
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
