@@ -1,0 +1,97 @@
+agentic_royalty_path:
+  schema_version: "0.1.0-candidate"
+  path_id: arp_20260703_001
+  created_at: "2026-07-03T18:30:00Z"
+
+  goal:
+    intent: "verify login flow"
+    origin_ref: "test-flow-login-v1"
+    expected_outcome: "dashboard page is displayed after successful login"
+
+  path_layer:
+    route_type: browser_verification_path
+    wayfinder_ref: "wayfinder-login-route-v1"
+    steps:
+      - step_id: s1
+        action_type: open_page
+        target: "http://localhost:3000/login"
+        purpose: "open login page"
+      - step_id: s2
+        action_type: type_input
+        target: "email_field"
+        purpose: "enter test email"
+      - step_id: s3
+        action_type: type_input
+        target: "password_field"
+        purpose: "enter test password"
+      - step_id: s4
+        action_type: click
+        target: "login_button"
+        purpose: "submit credentials"
+      - step_id: s5
+        action_type: observe
+        target: "dashboard_page"
+        purpose: "verify successful navigation"
+
+  action_receipts:
+    - receipt_id: bar_001
+      step_ref: s1
+      action_type: open_page
+      evidence_hash: "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    - receipt_id: bar_002
+      step_ref: s4
+      action_type: click
+      evidence_hash: "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    - receipt_id: bar_003
+      step_ref: s5
+      action_type: observe
+      evidence_hash: "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+
+  agent_log:
+    session_id: vscode_agent_session_001
+    environment: vscode_copilot_agent
+    tool_calls:
+      - openBrowserPage
+      - typeInPage
+      - clickElement
+      - screenshotPage
+    errors: []
+    duration_ms: 18420
+
+  path_hash_chain:
+    step_hashes:
+      - step_id: s1
+        hash: "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      - step_id: s2
+        hash: "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      - step_id: s3
+        hash: "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      - step_id: s4
+        hash: "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      - step_id: s5
+        hash: "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    chain_hash: "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+
+  monetization_event:
+    enabled: false
+    event_ref: null
+    provider: null
+    protocol: null
+
+  audit:
+    permission_boundary: "isolated_agent_browser_session"
+    reproducible: true
+    human_review_required: true
+    audit_status: pending_review
+
+  royalty_mapping:
+    status: candidate
+    origin_events:
+      - "test_flow_design"
+      - "ui_component_structure"
+      - "browser_action_script"
+    derivative_events:
+      - "automated_verification"
+      - "bug_detection"
+      - "fix_commit_candidate"
+    legal_claim_created: false
