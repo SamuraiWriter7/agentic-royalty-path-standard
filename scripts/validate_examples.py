@@ -33,6 +33,11 @@ VALIDATION_TARGETS = [
         "schema": ROOT / "schemas" / "provider-bridge.schema.json",
         "example": ROOT / "examples" / "provider-bridge.cloudflare-x402.example.yaml",
     },
+    {
+        "name": "Agent Commerce Audit Bridge",
+        "schema": ROOT / "schemas" / "agent-commerce-audit-bridge.schema.json",
+        "example": ROOT / "examples" / "agent-commerce-audit-bridge.example.yaml",
+    },
 ]
 
 
