@@ -1,5 +1,43 @@
 # Changelog
 
+## v0.3.0-candidate — Path Royalty Weighting
+
+Third candidate release.
+
+### Added
+
+- `path-royalty-weighting.schema.json`
+- `path-royalty-weighting.example.yaml`
+- Validation support for path royalty weighting examples
+- Candidate scoring model for agentic value paths
+- Candidate royalty share mapping
+
+### New concepts
+
+- `path_royalty_weighting`
+- `scoring_model`
+- `scoring_factors`
+- `royalty_candidates`
+- `suggested_share`
+- `payment_context`
+- `weighting_status`
+
+### Purpose
+
+v0.3 connects agentic value paths to candidate royalty weighting.
+
+v0.1 recorded the path.  
+v0.2 connected monetization events.  
+v0.3 introduces a way to suggest how value generated along that path may be attributed among contributors.
+
+### Important note
+
+Path Royalty Weighting records are audit-ready candidate records.
+
+They do not create legal royalty claims by themselves.
+
+Any `suggested_share` should be treated as provisional until reviewed by a human, marketplace rule, legal framework, or external royalty engine.
+
 ## v0.2.0-candidate — Monetization Event Extension
 
 Second candidate release.
