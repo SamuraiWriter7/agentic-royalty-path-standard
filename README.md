@@ -183,3 +183,66 @@ Path Royalty Weighting records are candidate records.
 They do not create legal royalty claims.
 
 Any suggested share must be reviewed by a human, marketplace rule, legal framework, or external royalty engine before payout.
+
+## v0.4 — Provider Bridge Layer
+
+v0.4 introduces the Provider Bridge Layer.
+
+This layer defines how external infrastructure providers can be mapped into the Agentic Royalty Path Standard.
+
+Examples include:
+
+- edge monetization gateways
+- payment networks
+- API billing platforms
+- MCP tool gateways
+- agent commerce platforms
+- marketplaces
+- identity providers
+
+The Provider Bridge Layer does not define payment execution or legal royalty claims.
+
+Instead, it defines an interoperability record for translating external provider events into audit-ready Agentic Royalty Path records.
+
+```text
+External Provider
+  ↓
+Provider Bridge
+  ↓
+Monetization Event
+  ↓
+Agentic Royalty Path
+  ↓
+Path Royalty Weighting
+  ↓
+Audit
+  ↓
+Royalty Candidate
+Added in v0.4
+provider-bridge.schema.json
+provider-bridge.cloudflare-x402.example.yaml
+validation coverage for provider bridge examples
+Provider Bridge concepts
+
+v0.4 introduces:
+
+provider
+capabilities
+protocol_bindings
+event_mapping
+data_policy
+trust_boundary
+bridge_status
+Design principle
+
+The Provider Bridge Layer is provider-neutral.
+
+It can describe Cloudflare-style monetization gateways, x402-style payment flows, API billing systems, MCP tool payment gateways, agent commerce platforms, or future external settlement providers.
+
+Important note
+
+Provider Bridge records are interoperability records.
+
+They do not create legal royalty claims.
+
+External provider events should be treated as audit evidence until reviewed by a human, marketplace rule, legal framework, or external royalty engine.
