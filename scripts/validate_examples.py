@@ -28,6 +28,11 @@ VALIDATION_TARGETS = [
         "schema": ROOT / "schemas" / "path-royalty-weighting.schema.json",
         "example": ROOT / "examples" / "path-royalty-weighting.example.yaml",
     },
+    {
+        "name": "Provider Bridge",
+        "schema": ROOT / "schemas" / "provider-bridge.schema.json",
+        "example": ROOT / "examples" / "provider-bridge.cloudflare-x402.example.yaml",
+    },
 ]
 
 
