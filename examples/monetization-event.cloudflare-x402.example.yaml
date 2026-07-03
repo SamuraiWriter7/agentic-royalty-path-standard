@@ -1,0 +1,43 @@
+monetization_event:
+  schema_version: "0.2.0-candidate"
+  event_id: me_20260703_001
+  created_at: "2026-07-03T18:45:00Z"
+
+  event_type: paid_resource_access
+  provider: cloudflare_monetization_gateway
+  protocol: x402
+
+  resource:
+    resource_type: web_page
+    resource_ref: "https://example.com/premium-resource"
+    resource_owner_ref: "origin-owner-001"
+    origin_ref: "origin:premium-resource-v1"
+
+  pricing:
+    pricing_policy_ref: "pricing-policy-premium-resource-v1"
+    amount: "0.005"
+    currency: "USD-stablecoin"
+    unit: per_request
+
+  request_context:
+    path_ref: "arp_20260703_001"
+    action_receipt_ref: "bar_003"
+    wayfinder_step_ref: "s5"
+    agent_identity_ref: "agent:vscode-copilot-session-001"
+    session_ref: "vscode_agent_session_001"
+
+  payment_receipt:
+    payment_required: true
+    payment_status: verified
+    settlement_ref: "external:x402:settlement-001"
+    receipt_hash: "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    amount_paid:
+      amount: "0.005"
+      currency: "USD-stablecoin"
+
+  audit:
+    external_provider_verified: true
+    replay_protection: true
+    audit_status: confirmed
+    legal_claim_created: false
+    notes: "Payment event is treated as audit-ready evidence, not as a legal royalty claim."
