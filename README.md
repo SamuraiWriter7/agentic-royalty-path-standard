@@ -127,3 +127,59 @@ monetization-event.schema.json
 monetization-event.cloudflare-x402.example.yaml
 agentic-royalty-path.monetized.example.yaml
 validation coverage for monetized path examples
+
+## v0.3 — Path Royalty Weighting
+
+v0.3 introduces Path Royalty Weighting.
+
+This layer maps an AI agent value-generation path into candidate royalty shares.
+
+It does not calculate legally enforceable royalties by itself.  
+Instead, it provides an audit-ready candidate weighting record based on path evidence, origin dependency, monetization signals, action receipts, and review status.
+
+```text
+Origin
+  ↓
+Agentic Path
+  ↓
+Action Receipts
+  ↓
+Monetization Event
+  ↓
+Path Royalty Weighting
+  ↓
+Audit
+  ↓
+Royalty Candidate
+Added in v0.3
+path-royalty-weighting.schema.json
+path-royalty-weighting.example.yaml
+validation coverage for royalty weighting examples
+Scoring factors
+
+v0.3 introduces candidate scoring factors such as:
+
+path_complexity
+origin_dependency
+action_receipt_confidence
+monetization_signal
+agent_decision_depth
+human_review_depth
+reproducibility_score
+Royalty candidates
+
+Each royalty candidate includes:
+
+role
+beneficiary reference
+contribution basis
+suggested share
+evidence references
+audit status
+Important note
+
+Path Royalty Weighting records are candidate records.
+
+They do not create legal royalty claims.
+
+Any suggested share must be reviewed by a human, marketplace rule, legal framework, or external royalty engine before payout.
