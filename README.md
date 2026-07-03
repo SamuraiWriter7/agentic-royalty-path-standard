@@ -1,2 +1,92 @@
-# agentic-royalty-path-standard
+# Agentic Royalty Path Standard
+
 A standard for mapping AI agent action paths, browser receipts, execution logs, and monetization events into audit-ready royalty candidates.
+
+## Purpose
+
+Agentic Royalty Path Standard defines a minimal record format for capturing how an AI agent reaches a value-generating outcome.
+
+It focuses on the path, not only the final artifact.
+
+In AI-assisted development, research, commerce, and content workflows, value is increasingly generated through agentic sequences:
+
+- reading or navigating resources
+- operating browser or application environments
+- executing tools
+- observing results
+- detecting issues
+- producing derivative outcomes
+- triggering monetization or payment events
+
+This standard records those sequences as audit-ready value paths.
+
+## Core idea
+
+Traditional royalty accounting often focuses on static outputs:
+
+```text
+Origin
+  ↓
+Derivative
+  ↓
+Audit
+  ↓
+Royalty
+
+Agentic Royalty Path extends this into dynamic path accounting:
+
+Origin
+  ↓
+Agentic Path
+  ↓
+Action Receipts
+  ↓
+Agent Log
+  ↓
+Audit
+  ↓
+Royalty Candidate
+v0.1 scope
+
+v0.1 introduces the Agentic Royalty Path Core.
+
+It defines:
+
+goal
+path layer
+action receipts
+agent log
+path hash chain
+monetization event placeholder
+audit status
+royalty candidate mapping
+What this standard does not do
+
+This standard does not create legal royalty claims by itself.
+
+Instead, it records audit-ready evidence that a value-generating agent path occurred.
+
+The royalty_mapping section should be treated as a candidate mapping until reviewed by a human, legal framework, marketplace rule, or external royalty engine.
+
+Repository structure
+schemas/
+  agentic-royalty-path.schema.json
+
+examples/
+  agentic-royalty-path.example.yaml
+
+scripts/
+  validate_examples.py
+Validate
+python scripts/validate_examples.py
+Version
+
+Current candidate:
+
+v0.1.0-candidate — Agentic Royalty Path Core
+Roadmap
+v0.1 — Agentic Royalty Path Core
+v0.2 — Monetization Event Extension
+v0.3 — Path Royalty Weighting
+v0.4 — Provider Bridge Layer
+v0.5 — Agent Commerce Audit Bridge
